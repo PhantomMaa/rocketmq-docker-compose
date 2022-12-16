@@ -1,8 +1,7 @@
 version: '2'
 services:
   namesrv:
-    #image: apacherocketmq/rocketmq:4.5.0
-    image: registry.silot.tech/common/apacherocketmq:4.5.0
+    image: apache/rocketmq:4.9.4
     container_name: rmqnamesrv
     ports:
       - 9876:9876
@@ -10,8 +9,7 @@ services:
       - ./data/namesrv/logs:/home/rocketmq/logs
     command: sh mqnamesrv
   broker:
-    #image: apacherocketmq/rocketmq:4.5.0
-    image: registry.silot.tech/common/apacherocketmq:4.5.0
+    image: apache/rocketmq:4.9.4
     container_name: rmqbroker
     links:
       - namesrv
@@ -23,5 +21,5 @@ services:
     volumes:
       - ./data/broker/logs:/home/rocketmq/logs
       - ./data/broker/store:/home/rocketmq/store
-      - ./data/broker/conf/broker.conf:/opt/rocketmq-4.5.0/conf/broker.conf
-    command: sh mqbroker -c /opt/rocketmq-4.5.0/conf/broker.conf
+      - ./data/broker/conf/broker.conf:/opt/rocketmq-4.9.4/conf/broker.conf
+    command: sh mqbroker -c /opt/rocketmq-4.9.4/conf/broker.conf
